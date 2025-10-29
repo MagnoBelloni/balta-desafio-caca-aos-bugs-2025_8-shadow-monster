@@ -12,6 +12,8 @@ builder.Services.AddInfrastructureDependencies();
 
 var app = builder.Build();
 
+app.MapGet("/", () => Results.Redirect("/swagger"));
+
 app.MapCustomersEndpoints();
 app.MapProductsEndpoints();
 app.MapOrdersEndpoints();
