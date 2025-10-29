@@ -15,6 +15,8 @@ Neste processo eu aprendi:
 * ✅ GitHub Actions
 * ✅ Microsoft Azure
 
+[LINK DO APP](https://balta-desafio-halloween-2025-h6gpdsb8ghgzeqae.brazilsouth-01.azurewebsites.net)
+
 ## REGRAS DO DESAFIO
 - [ ] Realizar um fork do repositório do desafio
 - [ ] Criar um Workflow para branch main

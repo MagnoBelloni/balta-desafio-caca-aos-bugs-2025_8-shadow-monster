@@ -26,6 +26,9 @@ jobs:
       - name: Tests
         run: dotnet test --no-build --configuration Release ./src
 
+      - name: Entity Update-Database 
+        run: dotnet ef database update --no-build --project ./src/BugStore.Api/BugStore.Api.csproj
+
       - name: Publish artifact
         run: dotnet publish --no-build ./src/BugStore.Api/BugStore.Api.csproj --configuration Release --output publish
        
