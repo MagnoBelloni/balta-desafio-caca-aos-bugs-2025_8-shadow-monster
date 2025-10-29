@@ -25,8 +25,14 @@ jobs:
 
       - name: Tests
         run: dotnet test --no-build --configuration Release ./src
+      
+      - name: Install Entity Framework CLI
+        run: dotnet tool install --global dotnet-ef
 
-      - name: Entity Update-Database 
+      - name: Add .NET tools to PATH
+        run: echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
+
+      - name: Entity Framework Update-Database 
         run: dotnet ef database update --no-build --configuration Release --project ./src/BugStore.Api/BugStore.Api.csproj
 
       - name: Publish artifact
