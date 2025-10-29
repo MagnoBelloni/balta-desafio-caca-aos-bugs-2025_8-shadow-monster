@@ -1,12 +1,13 @@
 ﻿using BugStore.Application.Orders.Requests;
 using BugStore.Application.Orders.Responses;
 using BugStore.Domain.Entities;
+using BugStore.Domain.Interfaces.CacheRepositories;
 using BugStore.Domain.Interfaces.Repositories;
 using MediatR;
 
 namespace BugStore.Application.Orders.Handlers;
 
-public class CreateOrderRequestHandler(ICustomerRepository customerRepository, IProductRepository productRepository, IOrderRepository orderRepository) : IRequestHandler<CreateOrderRequest, CreateOrderResponse>
+public class CreateOrderRequestHandler(ICustomerRepository customerRepository, IProductRepository productRepository, IOrderCacheRepository orderRepository) : IRequestHandler<CreateOrderRequest, CreateOrderResponse>
 {
     public async Task<CreateOrderResponse> Handle(CreateOrderRequest request, CancellationToken cancellationToken)
     {

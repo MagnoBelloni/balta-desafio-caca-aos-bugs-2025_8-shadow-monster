@@ -1,12 +1,11 @@
+using BugStore.Api;
 using BugStore.Api.Controllers;
 using BugStore.Application;
 using BugStore.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
+builder.Services.AddApiDependencies();
 builder.Services.AddApplicationDependencies();
 builder.Services.AddInfrastructureDependencies();
 

@@ -1,12 +1,12 @@
 ﻿using BugStore.Application.Reports.Requests;
+using BugStore.Application.Reports.Responses;
 using BugStore.Domain.Helpers;
-using BugStore.Domain.Interfaces.Repositories;
-using BugStore.Domain.Responses.Reports;
+using BugStore.Domain.Interfaces.CacheRepositories;
 using MediatR;
 
 namespace BugStore.Application.Reports.Handlers
 {
-    public class RevenueByPeriodRequestHandler(IOrderRepository orderRepository) : IRequestHandler<RevenueByPeriodRequest, RevenueByPeriodResponse>
+    public class RevenueByPeriodRequestHandler(IOrderCacheRepository orderRepository) : IRequestHandler<RevenueByPeriodRequest, RevenueByPeriodResponse>
     {
         public async Task<RevenueByPeriodResponse> Handle(RevenueByPeriodRequest request, CancellationToken cancellationToken)
         {

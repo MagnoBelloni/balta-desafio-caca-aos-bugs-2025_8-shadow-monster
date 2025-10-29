@@ -1,4 +1,4 @@
-﻿using BugStore.Domain.Responses.Reports;
+﻿using BugStore.Application.Reports.Responses;
 using MediatR;
 
 namespace BugStore.Application.Reports.Requests
@@ -14,7 +14,7 @@ namespace BugStore.Application.Reports.Requests
             if (Year < 0)
                 return false;
 
-            if (Month is < 1 or > 12) 
+            if (Month is < 1 or > 12)
                 return false;
 
             return true;

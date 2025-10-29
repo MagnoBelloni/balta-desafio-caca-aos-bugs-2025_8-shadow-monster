@@ -1,13 +1,8 @@
-﻿using BugStore.Domain.Constants;
-using BugStore.Domain.Dtos.Reports;
+﻿using BugStore.Domain.Dtos.Reports;
 using BugStore.Domain.Entities;
-using BugStore.Domain.Helpers;
 using BugStore.Domain.Interfaces.Repositories;
-using BugStore.Domain.Responses.Reports;
 using LinqKit;
 using Microsoft.EntityFrameworkCore;
-using System.Globalization;
-using System.Linq;
 using System.Linq.Expressions;
 
 namespace BugStore.Infrastructure.Data.Repositories
@@ -34,15 +29,12 @@ namespace BugStore.Infrastructure.Data.Repositories
                 .AsNoTracking()
                 .Include(x => x.Customer)
                 .Include(x => x.Lines)
-                .ThenInclude(x => x.Product);
-
-            if (filter != null)
-                query = query.Where(filter);
+                .ThenInclude(x => x.Product)
+                .Where(filter);
 
             var totalCount = await query.CountAsync(cancellationToken);
 
-            if (orderBy != null)
-                query = orderBy(query);
+            query = orderBy(query);
 
             var items = await query
                 .Skip((page - 1) * pageSize)

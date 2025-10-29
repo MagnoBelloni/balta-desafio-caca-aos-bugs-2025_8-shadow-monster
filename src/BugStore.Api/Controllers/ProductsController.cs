@@ -15,7 +15,11 @@ namespace BugStore.Api.Controllers
                 return Results.Ok(result);
             });
 
-            group.MapGet("/{id}", () => "Hello World!");
+            group.MapGet("/{id:guid}", async (Guid id, IMediator mediator) =>
+            {
+                var result = await mediator.Send(new GetProductByIdRequest { Id = id });
+                return result is not null ? Results.Ok(result) : Results.NotFound();
+            });
 
             group.MapPost("/", async (CreateProductRequest request, IMediator mediator) =>
             {
@@ -23,9 +27,18 @@ namespace BugStore.Api.Controllers
                 return Results.Created($"/v1/products/{result.Id}", result);
             });
 
-            group.MapPut("/{id}", () => "Hello World!");
+            group.MapPut("/{id:guid}", async (Guid id, UpdateProductRequest request, IMediator mediator) =>
+            {
+                request.Id = id;
+                var result = await mediator.Send(request);
+                return Results.Ok(result);
+            });
 
-            group.MapDelete("/{id}", () => "Hello World!");
+            group.MapDelete("/{id:guid}", async (Guid id, IMediator mediator) =>
+            {
+                await mediator.Send(new DeleteProductRequest { Id = id });
+                return Results.NoContent();
+            });
         }
     }
 }

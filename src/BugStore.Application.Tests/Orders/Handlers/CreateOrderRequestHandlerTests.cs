@@ -2,6 +2,7 @@
 using BugStore.Application.Orders.Handlers;
 using BugStore.Application.Orders.Requests;
 using BugStore.Domain.Entities;
+using BugStore.Domain.Interfaces.CacheRepositories;
 using BugStore.Domain.Interfaces.Repositories;
 using FluentAssertions;
 using Moq;
@@ -14,7 +15,7 @@ public class CreateOrderRequestHandlerTests
     private readonly Fixture fixture;
     private readonly Mock<ICustomerRepository> customerRepository;
     private readonly Mock<IProductRepository> productRepository;
-    private readonly Mock<IOrderRepository> orderRepository;
+    private readonly Mock<IOrderCacheRepository> orderRepository;
     private readonly CreateOrderRequestHandler handler;
 
     public CreateOrderRequestHandlerTests()
@@ -22,7 +23,7 @@ public class CreateOrderRequestHandlerTests
         fixture = new Fixture();
         customerRepository = new Mock<ICustomerRepository>();
         productRepository = new Mock<IProductRepository>();
-        orderRepository = new Mock<IOrderRepository>();
+        orderRepository = new Mock<IOrderCacheRepository>();
 
         handler = new CreateOrderRequestHandler(
             customerRepository.Object,
