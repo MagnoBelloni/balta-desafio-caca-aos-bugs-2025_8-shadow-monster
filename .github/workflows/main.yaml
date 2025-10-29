@@ -25,3 +25,16 @@ jobs:
 
       - name: Tests
         run: dotnet test --no-build --configuration Release ./src
+
+      - name: Publish artifact
+        run: dotnet publish --no-build ./src/BugStore.Api/BugStore.Api.csproj --configuration Release --output publish
+       
+      - name: Zip published artifact
+        run: cd publish && zip -r ../published-app.zip . && cd ..
+
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: balta-desafio-halloween-2025
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: './published-app.zip'
